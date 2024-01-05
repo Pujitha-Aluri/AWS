@@ -43,11 +43,11 @@ with open("Model.pkl",'rb')as f:
     
     
 #create a function to accept inputs and create an array
-def predict(bed,bath,loc,size,facing,Type):
+def predict(bed,bath,loc,size,facing,type):
     """Function to accept data"""
     selected_location = location_mapping[loc]
     selected_direction = direction_mapping[facing]
-    selected_property = property_type_mapping[Type]
+    selected_property = property_type_mapping[type]
     input_data = np.array([[bed,bath,selected_location,
                             size,selected_direction,
                             selected_property]])
@@ -64,9 +64,9 @@ if __name__ == "__main__":
     size = col1.number_input("Area",max_value=10000,
                              min_value = 500,value=1000,step=500)
     facing = col1.selectbox("Select a Facing",list(direction_mapping.keys()))
-    Type = col1.selectbox("Select Property Type",
+    type = col1.selectbox("Select Property Type",
                           list(property_type_mapping.keys()))
-    result = predict(bed,bath,loc,size,facing,Type)
+    result = predict(bed,bath,loc,size,facing,type)
     submit_button = st.button("Submit")
     if submit_button:
         larger_text = f"<h2 style='color: blue;'>The Predicted House Price is : {format(result, '.2f')} Lakhs</h2>"
